@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 public class Tools {
 
-	private int aNumber;
-	private int bNumber;
+	private static int aNumber;
+	private static int bNumber;
+	private static int tab[];
 	
 	
 	public Tools(int aNumber,int bNumber)
@@ -57,7 +58,88 @@ public class Tools {
 	
 	public static void ordonnerTab1()
 	{
-		//linearyMethod
+		System.out.println("Faites-un choix parmi les methodes");
+		System.out.println("1.-Tri a bulle\n2.-Tri par transposition\n3.-Tri par selection\n4.-Tri par insertion lineaire");
+		int choice=scan().nextInt();
+		
+			switch(choice)
+			{
+			 case 1:{//firstMethod(tri a bulle)
+					   for(int p=0;p<=tab.length;p++)
+					   {
+						   for(int i=0;i<=tab.length-p;i++)
+						   {
+							   int temp;
+							   if(tab[i]>tab[i+1])
+							   {
+								   temp=tab[i];
+								   tab[i]=tab[i+1];
+								   tab[i+1]=temp;
+							   }
+						   }
+			           }
+			        }break;
+			 case 2:{//secondMethod(tri par transposition)
+				 int j,temp;
+				 		for(int i=0;i<=tab.length;i++)
+				 		{
+				 			if(tab[i]>tab[i+1])
+				 			{
+				 				
+				 				temp=tab[i];
+				 				tab[i]=tab[i+1];
+				 				tab[i+1]=temp;
+				 				j=i--;
+				 				while(j>=1)
+				 				{
+				 					if(tab[j]>tab[j+1])
+				 					{
+				 						temp=tab[j];
+				 						tab[j]=tab[j+1];
+				 						tab[j+1]=temp;
+				 						j--;
+				 					}
+				 					else
+				 						j=0;
+				 				}
+				 			}
+				 		}
+			 		}break;
+			 case 3:{//thirdmethod(tri par selection)
+				 		int min,k;
+				 		for(int i=0;i<=tab.length;i++)
+				 		{
+				 			min=tab[i];
+				 			k=i;
+				 			for(int j=i+1;j<=tab.length-1;j++)
+				 			{
+				 				if(min>tab[j])
+				 				{
+				 					min=tab[j];
+				 					k=j;
+				 				}
+				 				tab[k]=tab[i];
+				 				tab[i]=min;
+				 			}
+				 		}
+			 		}break;
+			 case 4:{//fourthMethod(tri par insertion lineaire
+				 		int x,j;
+				 		for(int i=1;i<=tab.length-1;i++)
+				 		{
+				 			x=tab[i];
+				 			j=i--;
+				 			while(j>0 && x<tab[j])
+				 			{
+				 				tab[j+1]=tab[j];
+				 				j--;
+				 			}
+				 			tab[j+1]=x;
+				 		}
+			 		}break;
+			 default:
+				 System.out.println("Erreur!!");
+			}
 		
 	}
 }
