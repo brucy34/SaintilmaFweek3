@@ -226,7 +226,55 @@ public class Tools {
 			 		}break;
 			 default:
 				 System.out.println("Erreur!!");
+				 break;
 			}
+		
+	}
+	public static void searchOnTable()
+	{
+		System.out.println("Veuillez indiquer la metode de recherche");
+		System.out.println("1.-Methode dichotomique\n2.-Methode lineaire\n3.-Methode de fibonacci");
+		int choice=scan().nextInt();
+		System.out.println("Faites le choix du nombre");
+		int number=scan().nextInt();
+		
+		switch(choice)
+		{
+		case 1:{//dichotomicMethod
+				  int inf=1,sup=tab.length,center=(inf+sup)/2;
+				  boolean trouv=true;
+				
+				  while(!trouv && inf <= sup)
+				  {
+					  if(tab[center]==number)
+					  {
+						trouv=true;
+					  }
+					  else if(number<tab[center])
+						sup= center-1;
+					  else
+						inf=center+1;
+					
+					center=(inf+sup)/2;
+				  }
+				
+			   }break;
+		case 2:{//linearMethod
+					for(int i=0;i<tab.length;i++)
+					{
+						if(tab[i]==number)
+						{
+							System.out.println("trouve");
+						}
+					}
+			   }break;
+		case 3:{//fibonacciMethod
+					int fib1=0,fib2=1,fibM=fib1+fib2;
+					
+					//while(fibM<n)
+			   }
+		}
+		
 		
 	}
 }
