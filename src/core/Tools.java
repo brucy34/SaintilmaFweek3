@@ -22,10 +22,9 @@ public class Tools {
 	}
 	public static int tableConstitution()
 	{
-		int aNumber;
-		int bNumber;
+		
 		System.out.println("Veuillez entrez la grandeur du tableau");
-		scan();
+
 		aNumber = scan().nextInt();
 		int tab[]=new int [aNumber];
 		
@@ -230,6 +229,10 @@ public class Tools {
 			}
 		
 	}
+	public static int minimum(int x,int y)
+	{
+		return (x<=y)? x:y;
+	}
 	public static void searchOnTable()
 	{
 		System.out.println("Veuillez indiquer la metode de recherche");
@@ -271,8 +274,51 @@ public class Tools {
 		case 3:{//fibonacciMethod
 					int fib1=0,fib2=1,fibM=fib1+fib2;
 					
-					//while(fibM<n)
-			   }
+					while(fibM<tab.length)
+					{
+						fib1=fib2;
+						fib2=fibM;
+						fibM=fib1+fib2;
+					}
+					
+					int decal=-1;
+					
+					while(fibM>1)
+					{
+						int i=minimum(decal+fib1,tab.length-1);
+						
+						if(tab[i]<number)
+						{
+							fibM=fib2;
+							fib2=fib1;
+							fib1=fibM-fib2;
+							decal=i;
+						}
+						else if(tab[i]>number)
+						{
+							fibM=fib1;
+							fib2=fib2-fib1;
+							fib1=fibM-fib2;
+						}
+						else
+							System.out.println("Votre nombre existe dans le tableau\n");
+					}
+					if(fib2==1 && tab[tab.length-1]== number)
+						System.out.println("Votre nombre existe dans le tableau\n");
+					System.out.println("Votre nombre n'existe pas dans le tableau\n");
+			   }break;
+		case 4:{//JumpMethod
+					int n= tab.length;
+					int saut=(int)Math.floor(Math.sqrt(n));
+					int prev=0;
+					
+					while(tab[Math.min(saut, n)-1]<number)
+					{
+						prev=saut;
+						saut+=(int)Math.floor(Math.sqrt(n));
+					}
+			
+		       }break;
 		}
 		
 		
