@@ -6,54 +6,36 @@ import java.util.Scanner;
 public class Tools {
 
 	private static int aNumber;
-	private static int bNumber;
 	private static int tab[];
 	
 	
-	public Tools(int aNumber,int bNumber)
+	public static int getaNumber() {
+		return aNumber;
+	}
+	public static void setaNumber(int aNumber) {
+		Tools.aNumber = aNumber;
+	}
+	public static int[] getTab() {
+		return tab;
+	}
+	public static void setTab(int[] tab) {
+		Tools.tab = tab;
+	}
+ Tools(int aNumber,int tab[])
 	{
-		this.aNumber = aNumber;
-		this.bNumber = bNumber;
+		Tools.aNumber = aNumber;
+		System.arraycopy(tab, 0, Tools.tab, 0,tab.length);
 	}
 	public static Scanner scan()
 	{
 		Scanner scn = new Scanner(System.in);
 		return scn;	
 	}
-	public static int tableConstitution()
-	{
-		
-		System.out.println("Veuillez entrez la grandeur du tableau");
-
-		aNumber = scan().nextInt();
-		int tab[]=new int [aNumber];
-		
-		System.out.println("Veuillez entrez les valeurs du tablau");
-		scan();
-		
-		
-		for(int i=1;i<=aNumber;i++)
-		{
-			if(tab[i]==1)
-			{
-				System.out.println("Veuillez entrez le premier nombre");
-				tab[i]= scan().nextInt();
-			}
-			else if(tab[i]==aNumber)
-			{
-				System.out.println("Veuillez entrez la derniere valeur");
-				tab[i]=scan().nextInt();
-			}
-			else
-			{
-				System.out.println("Veuillez entrez la valeur suivante");
-				tab[i]=scan().nextInt();
-			}
-		}
-		
-		System.out.println(Arrays.toString(tab));
-		return tab[aNumber];
-	}
+//	public static int[] tableConstitution()
+//	{	
+//		System.out.println(Arrays.toString(tab));
+//		return tab;//[aNumber];
+//	}
 	
 	public static void ascendingTab()
 	{
@@ -64,23 +46,24 @@ public class Tools {
 			switch(choice)
 			{
 			 case 1:{//firstMethod(tri a bulle)
-					   for(int p=0;p<=tab.length;p++)
+					   for(int p=0;p<tab.length;p++)
 					   {
-						   for(int i=0;i<=tab.length-p;i++)
+						   for(int i=1;i<tab.length-p;i++)
 						   {
 							   int temp;
-							   if(tab[i]>tab[i+1])
+							   if(tab[i-1]>tab[i])
 							   {
-								   temp=tab[i];
-								   tab[i]=tab[i+1];
-								   tab[i+1]=temp;
-							   }
+								   temp=tab[i-1];
+								   tab[i-1]=tab[i];
+								   tab[i]=temp;
+							   }   
 						   }
 			           }
+					   System.out.println(Arrays.toString(tab));
 			        }break;
 			 case 2:{//secondMethod(tri par transposition)
 				 int j,temp;
-				 		for(int i=0;i<=tab.length;i++)
+				 		for(int i=0;i<tab.length;i++)
 				 		{
 				 			if(tab[i]>tab[i+1])
 				 			{
@@ -89,28 +72,31 @@ public class Tools {
 				 				tab[i]=tab[i+1];
 				 				tab[i+1]=temp;
 				 				j=i--;
-				 				while(j>=1)
+				 				while(j>=0)
 				 				{
+				 					
 				 					if(tab[j]>tab[j+1])
 				 					{
 				 						temp=tab[j];
 				 						tab[j]=tab[j+1];
 				 						tab[j+1]=temp;
 				 						j--;
+				 						System.out.println("I'm out");
 				 					}
 				 					else
 				 						j=0;
 				 				}
 				 			}
 				 		}
+				 		System.out.println(Arrays.toString(tab));
 			 		}break;
 			 case 3:{//thirdmethod(tri par selection)
 				 		int min,k;
-				 		for(int i=0;i<=tab.length;i++)
+				 		for(int i=0;i<tab.length;i++)
 				 		{
 				 			min=tab[i];
 				 			k=i;
-				 			for(int j=i+1;j<=tab.length-1;j++)
+				 			for(int j=i+1;j<tab.length-1;j++)
 				 			{
 				 				if(min>tab[j])
 				 				{
@@ -121,10 +107,11 @@ public class Tools {
 				 				tab[i]=min;
 				 			}
 				 		}
+				 		System.out.println(Arrays.toString(tab));
 			 		}break;
 			 case 4:{//fourthMethod(tri par insertion lineaire
 				 		int x,j;
-				 		for(int i=1;i<=tab.length-1;i++)
+				 		for(int i=1;i<tab.length-1;i++)
 				 		{
 				 			x=tab[i];
 				 			j=i--;
@@ -135,6 +122,7 @@ public class Tools {
 				 			}
 				 			tab[j+1]=x;
 				 		}
+				 		System.out.println(Arrays.toString(tab));
 			 		}break;
 			 default:
 				 System.out.println("Erreur!!");
@@ -236,7 +224,7 @@ public class Tools {
 	public static void searchOnTable()
 	{
 		System.out.println("Veuillez indiquer la metode de recherche");
-		System.out.println("1.-Methode dichotomique\n2.-Methode lineaire\n3.-Methode de fibonacci");
+		System.out.println("1.-Methode dichotomique\n2.-Methode lineaire\n3.-Methode de fibonacci\n4.-Methode Jump");
 		int choice=scan().nextInt();
 		System.out.println("Faites le choix du nombre");
 		int number=scan().nextInt();
@@ -316,9 +304,25 @@ public class Tools {
 					{
 						prev=saut;
 						saut+=(int)Math.floor(Math.sqrt(n));
+						if(prev>=n)
+							System.out.println("Votre nombre n'exixte pas dans le tableau");
 					}
+					
+					while(tab[prev]<number)
+					{
+						prev++;
+						if(prev==Math.min(saut, n))
+							System.out.println("Votre nombre n'exixte pas dans le tableau");
+					}
+					
+					if(tab[prev]==number)
+						System.out.println("Votre nombre existe dans le tableau");
+					
+					System.out.println("Votre nombre n'exixte pas dans le tableau");
 			
 		       }break;
+		  default:
+			  System.out.println("Erreur de saisie");
 		}
 		
 		
